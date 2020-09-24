@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>jsp</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<!-- name은 직접작성하는 부분 -->
+  	<servlet-name>basicServlet</servlet-name>
+  	<!-- 패키지부터 시작하는 풀네임을 적는다. -->
+  	<servlet-class>kr.or.ddit.basic.BasicServlet</servlet-class>
+  </servlet>
+  
+  <!-- servletname을 설정해줫으니 매핑시켜준다. -->
+  <!-- /basicServlet으로 요청이 올경우 basicServlet이라는 이름의 서블릿을 실행해라-->
+  <servlet-mapping>
+  	<servlet-name>basicServlet</servlet-name>
+  	<url-pattern>/basicServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>TimesTablesServlet</servlet-name>
+  	<servlet-class>kr.or.ddit.basic.TimesTablesServlet</servlet-class>
+  </servlet>
+  
+  <!-- servlet매핑하기 -->
+  <servlet-mapping>
+  	<servlet-name>TimesTablesServlet</servlet-name>
+  	<url-pattern>/TimesTablesServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  
+  
+</web-app>
