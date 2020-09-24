@@ -1,0 +1,49 @@
+톰캣에 bin 디렉토리에 startup.bat 서버실행시키고 파일적으면 실행
+경로를 제대로 적지 않으면  web.xml에있는 애들이 차례로 적용된다.
+<welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>  
+
+ROOT는 적지않음 ROOT가 연결되어 있기 때문에 그폴더 안에 있는건 localhost만 적어도된다.
+서버실행시 알아서 배포된당.startup.bat 
+
+서버할때 host는 건들면 안됨
+서버네임만 수정가능
+
+-HttpServlet쓰기위해 톰캣라이브러리에 추가하기
+project Facets 에 Runtimes 가면 추가할 프로젝트들이 있다 거기서 apply하면 lib가 추가됨
+
+- 줄맞춤 컨트롤 알트 f
+
+** 톰캣은 servletcontainer 서블릿을 담을 수잇는 용기정도
+WAS : ServletContainer + EJB Container(이기능이 힘들어서 나온게 spring) 
+톰캣이 서블릿 객체 만들어줌 new 사용자 요청이 들어오면 서블릿매핑을 보고 어떤 서버에서 처리할지 정해 톰캣이 실행한다.
+톰캣이 서블릿객체를 생성할때 init()를 처음한번 실행한다.
+service() 실행 
+
+요청방법
+1. 웹 브라우저 주소줄에 주소 입력 + enter => GET 요청방식
+2. 버튼 : form - get / form - post
+3. link => GET 요청방식
+
+HTTP method : get, post
+get : 바디영역이 없음 때문에 정보가  url에 노출
+post: 바디영역이 있다. form의 값들을 바디에 숨겨서 가져감 
+
+- 오늘 할일 컨텐츠를 동적으로 계속 바꾼다.
+1.서블릿을 만들고 내용을 만들고
+2. web.xml에서 url을 만들어 매핑해준다.
+3. server에 프로젝트 추가
+- 폴더이름이 꼭 어플리케이션이름이 되진 않는다. 
+server에 Modules탭 가서 Edit눌러 path변경가능 url이 간결해짐 저장은 ctrl+s 
+
+**github
+이클립스 프로젝트에 .gitignore 파일만들기 거기에 제거할 파일이름을 적으면 된다.
+이 과정을 대신해주는 사이트 = tignore.io
+사용한 툴 입력 ex)eclipse
+
