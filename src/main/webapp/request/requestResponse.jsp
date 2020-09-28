@@ -10,6 +10,7 @@
 <body>
 	<%request.setCharacterEncoding("utf-8"); %>
 	<%String select = request.getParameter("select"); %>
+	<%-- getMethod로 가져올 수 있다. request.getMethod() --%>
 	<h1><%=select %></h1>
 	<hr>
 	userId 파라미터는 green,lime 두개를 보내지만 getParameter를 호출하면 
@@ -34,13 +35,13 @@
 	<br><br>
 	
 	<hr>
-	요청에 존재하는 파라미터이름 출력하기 userId, pass
+	요청에 존재하는 파라미터이름 출력하기<br><br>
+	request.getParameterNames() : 
 	<%
 		Enumeration<String> names = request.getParameterNames();
 		while(names.hasMoreElements()){
 			String name = names.nextElement();
 	%>
-	request.getParameterNames() : 
 			<%=name %>
 	<% 	}%>
 	

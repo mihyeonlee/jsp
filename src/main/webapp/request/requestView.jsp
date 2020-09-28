@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+	// 문서로딩이 다 된뒤에 초기화된다.
 	$(function(){
-
 		$('#gp').on('click',function(){
 			var get = $('input:radio[name="select"]:checked').val();
-
+			console.log(get);
 			if(get=='POST'){
 					$('#ff').attr('method','POST');
 				}else{
