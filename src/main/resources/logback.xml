@@ -14,8 +14,8 @@
 </appender>
 
 	<!-- name의 하위패키지는 모두 이걸탐 -->
-   <logger name="kr.or.ddit" level="stdout">
-       <appender-ref ref="FILE" />
+   <logger name="kr.or.ddit" level="debug">
+       <appender-ref ref="STDOUT" />
    </logger> 
 <!--    <root level="DEBUG"> -->
 <!--        <appender-ref ref="STDOUT" /> -->
