@@ -16,15 +16,15 @@ public class MemberServiceTest {
 		String userId = "brown";
 		
 		MemberVO answerMemberVO = new MemberVO();
-		answerMemberVO.setUserId("brown");
-		answerMemberVO.setPassword("passBrown");
+		answerMemberVO.setUserid("brown");
+		answerMemberVO.setPass("brownPass");
 		
 		/***When***/
 		MemberVO memberVO = memberService.getMember(userId);
 
 		/***Then***/
-		assertEquals("brown", memberVO.getUserId());
-		assertEquals("passBrown", memberVO.getPassword());
+//		assertEquals("brown", memberVO.getUserid());
+//		assertEquals("brownPass", memberVO.getPass());
 		
 		//결과가 실패인이유 
 		assertEquals(answerMemberVO, memberVO);

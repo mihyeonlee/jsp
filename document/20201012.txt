@@ -1,0 +1,16 @@
+DBMS입장에서 통일한 SQL이란?
+모든 문자가 동일한 SQL
+
+다음 SQL은 DBMS 입장에서는 서로 다른 SQL로 인식된다.
+SELECT * FROM member;
+SELECT * FROM member;
+SELECt * FROM member;
+
+실습
+left 메뉴의 jobs 클릭시
+jobs 테이블에 저장된 모든 데이터를 table 태그를 이용하여 화면에 출력(job_id,job_title)
+Servlet(Controller), service(service), dao(respository),model,view, 
+테스트코드 : service, dao 
+
+MemberDao ==> 여기사용 금지
+member.xml ==> job.xml ==> mybatis-config.xml 
