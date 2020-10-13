@@ -66,6 +66,7 @@
 					<li class="active"><a href="#">Main <span class="sr-only">(current)</span></a></li>
 					<li class="active"><a href="#">사용자</a></li>
 					<li class="active"><a href="<%=request.getContextPath() %>/jobIdTitleServlet">jobs</a></li>
+					<li class="active"><a href="#">jobs</a></li>
 				</ul>
 			</div>
 		

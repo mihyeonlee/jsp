@@ -15,6 +15,7 @@ public class JobsDao implements JobsDaoI{
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		
 		List<JobsVO> jobIdTitleList = sqlSession.selectList("getJobIdTitle");
+		sqlSession.close();
 		
 		return jobIdTitleList;
 	}

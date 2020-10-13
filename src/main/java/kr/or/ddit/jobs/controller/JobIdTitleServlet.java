@@ -11,20 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.jobs.model.JobsVO;
 import kr.or.ddit.jobs.service.JobsService;
-import kr.or.ddit.jobs.service.JobsServiceI;
 
-/**
- * Servlet implementation class JobIdTitleServlet
- */
-@WebServlet("/jobIdTitleServlet")
+
+@WebServlet("/JobIdTitleServlet")
 public class JobIdTitleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	JobsServiceI jobsService = new JobsService();
        
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		JobsService jobsService = new JobsService();
 		List<JobsVO> jobIdTitle = jobsService.getJobIdTitle();
 		request.setAttribute("jobIdTitle", jobIdTitle);
 		request.getRequestDispatcher(request.getContextPath()+"jobs/jobsIdTitleView.jsp").forward(request, response);

@@ -27,6 +27,7 @@ public class MemberDao implements MemberDaoI{
 		//여러건 : selectList
 		
 		MemberVO memberVO = sqlSession.selectOne("member.getMember",userId);
+		sqlSession.close();
 		
 		return memberVO;
 	}
@@ -35,6 +36,7 @@ public class MemberDao implements MemberDaoI{
 	public List<MemberVO> selectAllMember() {
 		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		List<MemberVO> memberList = sqlSession.selectList("member.selectAllMember");
+		sqlSession.close();
 		
 		return memberList;
 	}
