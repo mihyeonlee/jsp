@@ -20,7 +20,7 @@
     <!-- Custom styles for this template -->
     <link href="<%=request.getContextPath() %>/css/signin.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/js/js.cookie-2.2.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/js.cookie-2.2.1.min.js"></script>
 	
 	<script>
 		$(function(){
@@ -112,7 +112,7 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" name="userId" class="form-control" value="brown" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only"  >Password</label>
-        <input type="password" id="inputPassword" class="form-control" value="passBrown" name="password" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control" value="brownPass" name="password" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me" name="remember" > Remember me

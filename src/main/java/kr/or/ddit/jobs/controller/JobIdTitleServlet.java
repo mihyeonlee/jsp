@@ -13,7 +13,7 @@ import kr.or.ddit.jobs.model.JobsVO;
 import kr.or.ddit.jobs.service.JobsService;
 
 
-@WebServlet("/JobIdTitleServlet")
+@WebServlet("/jobIdTitle")
 public class JobIdTitleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
