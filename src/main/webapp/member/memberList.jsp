@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,7 +15,9 @@
 <link rel="icon" href="../../favicon.ico">
 
 <title>Jsp</title>
-
+<script type="text/javascript">
+	
+</script>
 <%@include file="/layout/commonLib.jsp"%>
 </head>
 
@@ -55,14 +59,19 @@
 						</div>
 
 						<a class="btn btn-default pull-right">사용자 등록</a>
-
+						page:${page }
 						<div class="text-center">
 							<ul class="pagination">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
+								<c:forEach begin="1" end="${pages }" var="i">
+									<c:choose>
+										<c:when test="${i== page}">
+											<li class="active"><span>${i }</span></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="${pageContext.request.contextPath }/memberList?page=${i}" >${i }</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>

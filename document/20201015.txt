@@ -1,0 +1,59 @@
+<c:import url="ddd.jsp">
+	<c:param name="userId" value="userId">
+	
+
+[페이징 쿼리]
+조건이 있어야함.
+
+SELECT ROWNUM, a.*
+FROM
+    (SELECT * 
+     FROM users
+     ORDER BY userid) a
+WHERE ROWNUM BETWEEN 1 AND 7;
+
+ROWNUM은 1부터 있는 형태만 읽어올 수 있다. 
+ex) WHERE ROWNUM BETWEEN 1 AND 7; ==> OK
+	WHERE ROWNUM BETWEEN 8 AND 14; ==> 결과 없음
+	
+--> 때문에 이렇게 작성해야함
+SELECT *
+FROM
+    (SELECT ROWNUM rn, a.*
+    FROM
+        (SELECT * 
+         FROM users
+         ORDER BY userid) a)
+WHERE rn BETWEEN #{page} AND #{pageSize}
+WHERE rn BETWEEN 1 AND 7
+WHERE rn BETWEEN 8 AND 14
+WHERE rn BETWEEN 15 AND 21;
+
+SELECT *
+FROM
+    (SELECT ROWNUM rn, a.*
+    FROM
+        (SELECT * 
+         FROM users
+         ORDER BY userid) a)
+WHERE rn BETWEEN #{page} AND #{pageSize}
+WHERE rn BETWEEN ((#{page}-1)*#{pageSize})+1 AND #{page} * #{pageSize}
+
+페이지번호, 페이지 사이즈(7)
+int page = 2, int pageSize = 7
+
+SELECT *
+FROM
+    (SELECT ROWNUM rn, a.*
+    FROM
+        (SELECT * 
+         FROM users
+         ORDER BY userid) a)
+WHERE rn BETWEEN (:page-1)*:pageSize+1 AND :page * :pageSize;
+sql디벨로퍼에서 바인드함수사용방법 입력할변수명앞에 :변수명
+
+총 데이터페이지수  :15
+페이지 사이즈: 7
+15/7 = 2.xy ==> 올림 ==> 3
+/memberList?page=???
+
