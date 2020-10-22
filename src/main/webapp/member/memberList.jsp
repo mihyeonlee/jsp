@@ -16,11 +16,21 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
+<%@include file="/layout/commonLib.jsp"%>
 <title>Jsp</title>
-<script type="text/javascript">
+<script>
+$(document).ready(function(){
+	$('#memberList tr').on('click',function(){
+		// data-userid <tr>태그에 적어놓음
+		var userid = $(this).data("userid");
+		console.log("userid:"+userid);
+
+		document.location = "/member?userid=" + userid;
+		
+	});
+});
 	
 </script>
-<%@include file="/layout/commonLib.jsp"%>
 </head>
 
 <body>
@@ -40,7 +50,6 @@
 					<div class="col-sm-8 blog-main">
 						<h2 class="sub-header">사용자</h2>
 						<div class="table-responsive">
-
 							<table class="table table-striped">
 								<tr>
 									<th>사용자 아이디</th>
@@ -48,17 +57,18 @@
 									<th>사용자 별명</th>
 									<th>등록일시</th>
 								</tr>
-								<c:forEach items="${memberList }" var="member">
-									<tr>
-										<td>${member.userid }</td>
-										<td>${member.usernm }</td>
-										<td>${member.alias }</td>
-										
-										<!-- format : yyyy-MM-dd -->
-										<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd" /></td>
-									</tr>
-								</c:forEach>
-
+								<!--테이블내에서 가지고오려는 데이터를 나눌때 tbody많이 사용 -->
+								<tbody id="memberList">
+									<c:forEach items="${memberList }" var="member">
+										<tr data-userid="${member.userid }">
+											<td>${member.userid }</td>
+											<td>${member.usernm }</td>
+											<td>${member.alias }</td>
+											<!-- format : yyyy-MM-dd -->
+											<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd" /></td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
 
