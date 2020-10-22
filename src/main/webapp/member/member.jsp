@@ -29,14 +29,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-				<form class="form-horizontal" role="form">
-					<!-- 					<div class="form-group"> -->
-					<!-- 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label> -->
-					<!-- 						<div class="col-sm-10"> -->
-					<!-- 							<input type="text" class="form-control" id="userId" name="userId" -->
-					<!-- 								placeholder="사용자 아이디"> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
+				<form class="form-horizontal" role="form" action= >
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
@@ -101,7 +94,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">사용자 수정</button>
+							<a href="${cp }/memberUpdate?userid=${memberVo.userid}"><button type="button" class="btn btn-default">사용자 수정</button></a>
 						</div>
 					</div>
 				</form>

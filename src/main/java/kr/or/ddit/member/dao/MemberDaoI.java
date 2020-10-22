@@ -18,5 +18,11 @@ public interface MemberDaoI {
 	
 	public int getMemberTotalCnt(SqlSession sqlSession);
 	
+	public int insertMember(MemberVO memberVo);
+	
+	public int deleteMember(String userid);
+
+	public int updateMember(MemberVO memberVo);
+	
 	
 }
