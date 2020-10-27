@@ -15,6 +15,16 @@
 <link rel="icon" href="../../favicon.ico">
 <%@ include file="/layout/commonLib.jsp"%>
 <title>Jsp</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$('#profileDownBtn').on("click",function(){
+		document.location="/profileDownload?userid=${memberVo.userid}"
+	})
+	$('#summernote').summernote();
+})
+
+</script>
 
 </head>
 
@@ -29,14 +39,16 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-				<form class="form-horizontal" role="form" action= >
+				<form class="form-horizontal" role="form" action=>
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-<%-- 							<img src="${cp }/profile/${memberVo.filename }"/> --%>
-<!-- 사용자의 아이디보내서 확인  -->
-							<img src="${cp}/profileImg?userid=${memberVo.userid }"/>
+							<%-- 							<img src="${cp }/profile/${memberVo.filename }"/> --%>
+							<!-- 사용자의 아이디보내서 확인  -->
+							<img src="${cp}/profileDownload?userid=${memberVo.userid }" /><br>
+							<button type="button" class="btn btn-default" id="profileDownBtn" >다운로드 : ${memberVo.realfilename }</button>
+							
 						</div>
 					</div>
 					<div class="form-group">
@@ -49,7 +61,7 @@
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
 						<div class="col-sm-10">
-							
+
 							<label class="control-label">${memberVo.usernm}</label>
 						</div>
 					</div>
@@ -94,7 +106,8 @@
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<a href="${cp }/memberUpdate?userid=${memberVo.userid}"><button type="button" class="btn btn-default">사용자 수정</button></a>
+							<a href="${cp }/memberUpdate?userid=${memberVo.userid}"><button
+									type="button" class="btn btn-default">사용자 수정</button></a>
 						</div>
 					</div>
 				</form>

@@ -13,6 +13,23 @@ public class MemberVO {
 	private String zipcode;
 	private String filename;
 	private String realfilename;
+	
+	public MemberVO() {
+		
+	}
+	
+	public MemberVO(String userid, String pass, String alias, String usernm, String addr1, String addr2, String zipcode,
+			String filename, String realfilename) {
+		this.userid = userid;
+		this.pass = pass;
+		this.alias = alias;
+		this.usernm = usernm;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.zipcode = zipcode;
+		this.filename = filename;
+		this.realfilename = realfilename;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

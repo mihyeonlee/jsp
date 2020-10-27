@@ -29,11 +29,11 @@ $(document).ready(function(){
 		}).open();
 	});
 
-	$("#upBtn").on('click',function(){
+	$("#regBtn").on('click',function(){
 		//client side - validation  웹브라우저에서 보는 방법으로 우회가능
 		//server side - validation	때문에 두개 다 하는게 안전하다.
 		//validation 로직은 일단생략
-		$("#ff").submit();
+		$("#frm").submit();
 	});
 // 		initData();
 	
@@ -64,14 +64,13 @@ function initData(){
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-				<form id="ff" class="form-horizontal" role="form" 
-					  action="${cp }/memberUpdate" method="POST"
+				<form id="frm" class="form-horizontal" role="form" 
+					  action="${cp }/memberRegist" method="POST"
 					  enctype="multipart/form-data">
 					  
 					<div class="form-group">
 						<label for="realFilename" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-							<img src="${cp}/profileDownload?userid=${memberVo.userid }"/>
 							<input type="file" name="realFilename">
 						</div>
 					</div>
@@ -79,7 +78,7 @@ function initData(){
 						<label for="userid" class="col-sm-2 control-label">사용자 아이디</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="userid" name="userid"
-								placeholder="사용자 아이디" value="${memberVo.userid }" READONLY>
+								placeholder="사용자 아이디" value="${param.userid }">
 						</div>
 					</div>
 
@@ -87,21 +86,21 @@ function initData(){
 						<label for="usernm" class="col-sm-2 control-label">사용자 이름</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="usernm" name="usernm"
-								placeholder="사용자 이름" value="${memberVo.usernm }">
+								placeholder="사용자 이름" value="${param.usernm }">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="alias" class="col-sm-2 control-label">별명</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="alias" name="alias"
-								placeholder="사용자 별명" value="${memberVo.alias }">
+								placeholder="사용자 별명" value="${param.alias }">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">Password</label>
 						<div class="col-sm-10">
 							<input type="password" class="form-control" id="pass"
-								name="pass" placeholder="사용자 비밀번호" value="${memberVo.pass }">
+								name="pass" placeholder="사용자 비밀번호" value="${param.pass }">
 						</div>
 					</div>
 
@@ -109,7 +108,7 @@ function initData(){
 						<label for="addr1" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10 ">
 							<input type="text" class="form-control" id="addr1" name="addr1"
-								placeholder="사용자 주소" READONLY value="${memberVo.addr1 }">
+								placeholder="사용자 주소" READONLY value="${param.addr2 }">
 						</div>
 					</div>
 					<div class="form-group">
@@ -121,20 +120,20 @@ function initData(){
 						<label for="addr2" class="col-sm-2 control-label">상세주소</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="addr2" name="addr2"
-								placeholder="사용자 상세주소" value="${memberVo.addr2 }">
+								placeholder="사용자 상세주소" value="${param.addr2 }">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="zipcode" class="col-sm-2 control-label">우편번호</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="zipcode"
-								name="zipcode" placeholder="사용자 우편번호" READONLY value="${memberVo.zipcode }">
+								name="zipcode" placeholder="사용자 우편번호" READONLY value="${param.zipcode }">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button id="upBtn" type="button" class="btn btn-default">사용자 수정</button>
+							<button id="regBtn" type="button" class="btn btn-default">사용자 등록</button>
 						</div>
 					</div>
 				</form>
