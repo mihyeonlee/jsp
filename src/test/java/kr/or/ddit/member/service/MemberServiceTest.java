@@ -7,15 +7,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import junit.extensions.TestSetup;
 import kr.or.ddit.common.model.PageVO;
-import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
 public class MemberServiceTest {

@@ -1,7 +1,6 @@
 package kr.or.ddit.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.or.ddit.common.model.PageVO;
-import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
-import oracle.jdbc.proxy.annotation.Post;
 
 /**
  * Servlet implementation class MemberListServlet

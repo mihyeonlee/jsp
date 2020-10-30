@@ -1,11 +1,9 @@
 package kr.or.ddit.listener;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
