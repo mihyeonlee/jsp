@@ -10,18 +10,20 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- 스프링 부모 컨테이너 생성 : service, repository -->
+  <!-- 스프링 부모 컨테이너 생성 : service, repository  -->
   <context-param>
-  	<param-name>contextConfigLocation</param-name>
+  	<param-name>contextConfigLocation</param-name><!-- 고정? -->
   	<param-value>classpath:kr/or/ddit/config/spring/root-context.xml</param-value>
   </context-param>
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <!-- 자식 컨테이너 - dispatcherServlet을 통해 생성 : controller -->
+  
+  
+  <!-- 자식 컨테이너 - dispatcherServlet을 통해 생성 : controller  여러개 생성가능-->
   <servlet>
   	<servlet-name>dispatcherServlet</servlet-name>
-  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class><!-- 고정 -->
   	<init-param>
   		<param-name>contextConfigLocation</param-name>
   		<param-value>classpath:kr/or/ddit/config/spring/application-context.xml</param-value>
@@ -33,5 +35,33 @@
   	<servlet-name>dispatcherServlet</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>webServlet</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:kr/or/ddit/config/spring/application-context.xml</param-value>
+  	</init-param>
+  	<load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>webServlet</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 캐릭터 인코딩 설정-스프링 프레임워크 filter -->
+  <filter>
+  	<filter-name>encodingFileter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingFileter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
   
 </web-app>
