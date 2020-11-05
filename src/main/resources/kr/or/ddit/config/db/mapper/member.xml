@@ -10,5 +10,55 @@
 		WHERE userid = #{userid}
 	</select>
 	
+	<select id="selectAllMember" resultType="MemberVO">
+		SELECT *
+		FROM users
+	</select>
+	
+	<select id="getPageMember" resultType="MemberVO"
+		parameterType="PageVO">
+		SELECT *
+		FROM
+		(SELECT ROWNUM rn, a.*
+		FROM
+		(SELECT *
+		FROM users
+		ORDER BY userid) a)
+		WHERE rn BETWEEN (#{page}-1) * #{pageSize} +1 AND
+		#{page} * #{pageSize}
+	</select>
+	
+	<select id="getMemberTotalCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		users
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO users
+		VALUES(#{userid},#{usernm},#{pass},sysdate,#{alias},#{addr1},#{addr2},
+		#{zipcode},#{filename},#{realfilename})
+	</insert>
+	
+<!-- 	<delete id="deleteMember"> -->
+<!-- 		delete users -->
+<!-- 		where userid = #{userid} -->
+<!-- 	</delete> -->
+	
+	<update id="updateMember" parameterType="MemberVO">
+		UPDATE users  
+		<set>
+			<if test="usernm != null">usernm=#{usernm},</if>
+			<if test="pass != null">pass=#{pass},</if>
+			<if test="filename != null">filename=#{filename},</if>
+			<if test="realfilename != null">realfilename=#{realfilename},</if>
+			alias = #{alias},
+			addr1 = #{addr1},
+			addr2 = #{addr2},
+			zipcode = #{zipcode}
+		</set>
+		where userid=#{userid}
+	</update>
+	
 	
 </mapper>
