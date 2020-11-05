@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -101,7 +101,11 @@
   </head>
 
   <body>
-
+	msg : ${msg }<br>
+	msg_s : ${msg_s }
+	<c:remove var="msg_s" scope="session"/>
+	<br>
+	msg_ra : ${msg_ra }
     <div class="container">
 
       <form class="form-signin" action="<%=request.getContextPath() %>/login/process" method="post">
