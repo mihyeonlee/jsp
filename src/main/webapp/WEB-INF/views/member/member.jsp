@@ -19,7 +19,7 @@
 $(document).ready(function(){
 	
 	$('#profileDownBtn').on("click",function(){
-		document.location="/profile/download?userid=${memberVo.userid}"
+		document.location="/profileImgDownloadView?userid=${memberVo.userid}"
 	})
 })
 
@@ -45,7 +45,7 @@ $(document).ready(function(){
 						<div class="col-sm-10">
 							<%-- 							<img src="${cp }/profile/${memberVo.filename }"/> --%>
 							<!-- 사용자의 아이디보내서 확인  -->
-							<img src="${cp}/profile/download?userid=${memberVo.userid }" /><br>
+							<img src="${cp}/profileImgView?userid=${memberVo.userid }" /><br>
 							<button type="button" class="btn btn-default" id="profileDownBtn" >다운로드 : ${memberVo.realfilename }</button>
 							
 						</div>
