@@ -19,9 +19,8 @@
 $(document).ready(function(){
 	
 	$('#profileDownBtn').on("click",function(){
-		document.location="/profileDownload?userid=${memberVo.userid}"
+		document.location="/profile/download?userid=${memberVo.userid}"
 	})
-	$('#summernote').summernote();
 })
 
 </script>

@@ -7,10 +7,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- kr.or.ddit 패키지 하위의 클래스 중 @Controller 어노테이션이 붙은 클래스를 스캔하여 스프링 빈으로 생성 -->
 	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
 		<!-- 추가를 해줘야함 inclued -->
+		<!-- kr.or.ddit 패키지 하위의 클래스 중 @Controller 어노테이션이 붙은 클래스를 스캔하여 스프링 빈으로 생성 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

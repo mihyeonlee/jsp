@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
 <!DOCTYPE html>
@@ -87,6 +88,8 @@ function initData(){
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="usernm" name="usernm"
 								placeholder="사용자 이름" value="${param.usernm }">
+							<span style="color:blue;"><form:errors path="memberVO.usernm"/></span>
+							
 						</div>
 					</div>
 					<div class="form-group">

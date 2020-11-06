@@ -6,18 +6,23 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.common.model.PageVO;
+import kr.or.ddit.member.model.JSRMemberVO;
 import kr.or.ddit.member.model.MemberVO;
+import kr.or.ddit.member.model.MemberVoValidator;
 import kr.or.ddit.member.service.MemberServiceI;
 
 @RequestMapping("/member")
@@ -38,31 +43,28 @@ public class MemberController {
 	// 있기때문에 그렇게 쓰지 않는다.
 
 	@RequestMapping("/memberList")
-	public String memberList(String page, String pageSize, Model model) {
-		if (page == null) {
-			page = "1";
-		}
-		if (pageSize == null) {
-			pageSize = "7";
-		}
+	public String memberList(@RequestParam(name= "page", required= false,defaultValue="1") int page,
+							 @RequestParam(name="pageSize", required=false,defaultValue="7") int pageSize, Model model) {
+		
 		model.addAttribute("page", page);
 		model.addAttribute("pageSize", pageSize);
 
 		// pageVO
-		PageVO pageVO = new PageVO(Integer.parseInt(page), Integer.parseInt(pageSize));
+		PageVO pageVO = new PageVO(page, pageSize);
 
 		Map<String, Object> map = memberService.getPageMember(pageVO);
 		model.addAllAttributes(map);
 
 		return "member/memberList";
 	}
-
+	
 	@RequestMapping("/view")
 	public String view(String userid, Model model) {
+		//userid 파라미터가 없을 때는 brown사용자를 보여준다.
 
 		MemberVO memberVo = memberService.getMember(userid);
-
 		model.addAttribute("memberVo", memberVo);
+		
 
 		return "member/member";
 	}
@@ -74,27 +76,34 @@ public class MemberController {
 	}
 
 	@RequestMapping("/memberRegist")
-	public String memberRegist(MemberVO memberVo, @RequestPart("realFilename")MultipartFile file) {
+	public String memberRegist(@Valid MemberVO memberVo, BindingResult br, @RequestPart("realFilename")MultipartFile file) {
+//	public String memberRegist(@Valid JSRMemberVO memberVo, BindingResult br, @RequestPart("realFilename")MultipartFile file) {
+//		new MemberVoValidator().validate(memberVo, br);
+		
+		// 검증을 통과하지 못했으므로 사용자 등록 화면으로 이동
+		if(br.hasErrors()) {
+			return "member/memberRegist";
+		}
 		
 		logger.debug("file : {}", file);
 		
 		File profile = null;
 		String filename = UUID.randomUUID().toString();
+		
 		if (file.getSize() > 0) {
 			profile = new File("D:\\profile\\"+filename+file.getOriginalFilename());
+			try {
+				file.transferTo(profile);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			memberVo.setRealfilename(file.getOriginalFilename());
+			memberVo.setFilename(profile.toString());
 		}
-		try {
-			file.transferTo(profile);
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-		memberVo.setRealfilename(file.getOriginalFilename());
-		memberVo.setFilename(profile.toString());
 		
 		logger.debug("memberVo:{}",memberVo);
 		
 		int cnt = memberService.insertMember(memberVo);
-		
 		if (cnt == 1) {
 			return "redirect:/member/memberList";
 		}
