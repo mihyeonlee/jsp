@@ -45,6 +45,7 @@ public class MemberController {
 	@RequestMapping("/memberList")
 	public String memberList(@RequestParam(name= "page", required= false,defaultValue="1") int page,
 							 @RequestParam(name="pageSize", required=false,defaultValue="7") int pageSize, Model model) {
+		logger.debug("memberListController!!!");
 		
 		model.addAttribute("page", page);
 		model.addAttribute("pageSize", pageSize);
@@ -55,7 +56,7 @@ public class MemberController {
 		Map<String, Object> map = memberService.getPageMember(pageVO);
 		model.addAllAttributes(map);
 
-		return "member/memberList";
+		return "tiles.member.memberListContent";
 	}
 	
 	@RequestMapping("/view")
@@ -66,12 +67,12 @@ public class MemberController {
 		model.addAttribute("memberVo", memberVo);
 		
 
-		return "member/member";
+		return "tiles.member.memberContent";
 	}
 
 	@RequestMapping("/memberRegistView")
 	public String memberRegistView() {
-		return "member/memberRegist";
+		return "tiles.member.memberRegistContent";
 
 	}
 
@@ -82,7 +83,7 @@ public class MemberController {
 		
 		// 검증을 통과하지 못했으므로 사용자 등록 화면으로 이동
 		if(br.hasErrors()) {
-			return "member/memberRegist";
+			return "tiles.member.memberRegistContent";
 		}
 		
 		logger.debug("file : {}", file);
@@ -108,7 +109,7 @@ public class MemberController {
 			return "redirect:/member/memberList";
 		}
 		
-		return "member/memberRegist";
+		return "tiles.member.memberRegistContent";
 	}
 
 	@RequestMapping("/memberUpdateView")
@@ -119,7 +120,7 @@ public class MemberController {
 		MemberVO memberVo = memberService.getMember(userid);
 		model.addAttribute("memberVo", memberVo);
 
-		return "member/memberUpdate";
+		return "tiles.member.memberUpdateContent";
 	}
 
 	@RequestMapping("/memberUpdate")

@@ -10,7 +10,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath }/main.jsp">JSP/SPRING <c:if test="${S_MEMBER != null}">[${S_MEMBER.userid}]</c:if></a>
+				<a class="navbar-brand" href="/mains/main.jsp">JSP/SPRING <c:if test="${S_MEMBER != null}">[${S_MEMBER.userid}]</c:if></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">

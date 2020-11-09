@@ -23,9 +23,26 @@
 	<!-- viewResolver 설정 -->
 	<!-- BeanNameViewResolver는 빈으로 등록된 id와 일치하는 클래스를 뷰페이지로 이용 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<property name="order" value="0"/>
+		<property name="order" value="1"/>
 	</bean>
 	
+	<!-- tiles view resolver 추가 
+		1. tiles 설정 작업 ==> TilesConfigurer를 통해 설정
+		2. tiles view resolver 등록 -->
+	<bean id="titlesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:kr/or/ddit/config/tiles/tiles-definition.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>
+		<property name="order" value="0"></property>
+	</bean>
+	
+	<!-- InternalResourceViewResolver 파일이 있건없건 다 보내기때문에 우선순위 무조건 마지막 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- prifix : 접두어 , suffix : 접미어
 			Controller가 리턴하는 문자열에 prefix, suffix를 적용하여 해당 경로의 파일로 응답을 생성
@@ -35,7 +52,7 @@
 			"/WEB-INF/views/" + "login/view" + ".jsp"
 			"/WEB-INF/views/login/view.jsp"
 			 -->
-		<property name="order" value="1"/>	 
+		<property name="order" value="2"/>	 
 		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
@@ -57,7 +74,20 @@
 			2. WEB-INF : 외부에서 접근불가능한 공간에 저장된 자원들 접근 매핑 -->
 	 <!-- localhost/resoureces.style.css -->
 	 <mvc:resources mapping="/resources/**" location="/WEB-INF/views/error/" />
-	
+	 <mvc:resources mapping="/mains/**" location="/WEB-INF/views/" />
+	 
+	 <!-- localeResolver -->
+	 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+	 
+	 <!-- locale 변경 감지 interceptor -->
+	 <mvc:interceptors>
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/**"/>
+	 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	 			<property name="paramName" value="lang"/>
+	 		</bean>
+	 	</mvc:interceptor>
+	 </mvc:interceptors>	
 	
 	
 </beans>
