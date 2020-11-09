@@ -52,7 +52,7 @@
 			<if test="pass != null">pass=#{pass},</if>
 			<if test="filename != null">filename=#{filename},</if>
 			<if test="realfilename != null">realfilename=#{realfilename},</if>
-			alias = #{alias, jdbcType.VARCHAR},
+			alias = #{alias},
 			addr1 = #{addr1},
 			addr2 = #{addr2},
 			zipcode = #{zipcode}
