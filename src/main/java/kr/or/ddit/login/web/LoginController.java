@@ -3,6 +3,7 @@ package kr.or.ddit.login.web;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,8 +86,9 @@ public class LoginController {
 	// 요청 메소드가 GET일 때만 처리 method = RequestMethod.GET **복수 처리가능 method = {RequestMethod.GET,RequestMethod.POST}
 	@RequestMapping(path="/view",method = RequestMethod.GET)
 	@GetMapping()
-	public String getView() {
+	public String getView(Locale locale) {
 		logger.debug("LoginController.getView()");
+		logger.debug("locale : {}", locale);
 		
 		//응답은 jsp그대로 사용 => spring에서는 관습적으로 WEB-INF에 저장 -> 사용자의 jsp접근을 막겠다.
 		return "login/view";
@@ -101,6 +104,7 @@ public class LoginController {
 	
 	@RequestMapping(path="/process", params = {"userid"})
 	public String process(String userid, String pass, MemberVO memberVO, HttpSession session, Model model, 
+						@RequestBody String body,
 						@RequestParam(name="email", 
 									required=false, 
 									defaultValue = "brown@line.kr") String user_id) {
@@ -109,6 +113,7 @@ public class LoginController {
 		logger.debug("user_id:{}",user_id);
 		MemberVO memberVo = memberService.getMember(userid);
 		logger.debug("memberVo:{}",memberVo);
+		logger.debug("requestBody:{}",body);
 		
 		//db에서 조회한 사용자 정보가 존재하면 main.jsp
 		//존재하지 않으면 login.jsp로 이동  prefix : /WEB-INF/views/
