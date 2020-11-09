@@ -34,6 +34,11 @@ public class MemberVO {
 		this.filename = filename;
 		this.realfilename = realfilename;
 	}
+	public MemberVO(String userid, String usernm) {
+		this.userid = userid;
+		this.usernm = usernm;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

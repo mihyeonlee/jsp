@@ -18,12 +18,14 @@
 	<bean id="profileImgDownloadView" class="kr.or.ddit.mvc.view.ProfileImgDownloadView"/>
 	<bean id="profileImgView" class="kr.or.ddit.mvc.view.ProfileImgView"/>
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	<bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"/>
 	
 	<!-- viewResolver 설정 -->
 	<!-- BeanNameViewResolver는 빈으로 등록된 id와 일치하는 클래스를 뷰페이지로 이용 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"/>
 	</bean>
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- prifix : 접두어 , suffix : 접미어
 			Controller가 리턴하는 문자열에 prefix, suffix를 적용하여 해당 경로의 파일로 응답을 생성
