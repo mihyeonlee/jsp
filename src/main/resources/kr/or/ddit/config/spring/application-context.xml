@@ -44,7 +44,7 @@
 	
 	<!-- InternalResourceViewResolver 파일이 있건없건 다 보내기때문에 우선순위 무조건 마지막 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- prifix : 접두어 , suffix : 접미어
+		<!-- prefix : 접두어 , suffix : 접미어
 			Controller가 리턴하는 문자열에 prefix, suffix를 적용하여 해당 경로의 파일로 응답을 생성
 			LoginController.getView() ==> "login/view"
 			

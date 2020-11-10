@@ -50,7 +50,7 @@ public class MemberController {
 		model.addAttribute("page", page);
 		model.addAttribute("pageSize", pageSize);
 
-		// pageVO
+		//pageVO
 		PageVO pageVO = new PageVO(page, pageSize);
 
 		Map<String, Object> map = memberService.getPageMember(pageVO);
@@ -59,15 +59,56 @@ public class MemberController {
 		return "tiles.member.memberListContent";
 	}
 	
+	@RequestMapping("/listAjaxPage")
+	public String listAjaxPage() {
+		return "tiles.member.listAjaxPage";
+	}
+	
+	// 페이지요청(/list와 다르게 page, pageSize 파라미터가 반드시 존재한다는 가정으로 작성)
+	@RequestMapping("/listAjax")
+	public String listAjax(PageVO pageVO, Model model) {
+		logger.debug("pageVO:{}",pageVO);  // 커맨드객체는 자동으로 model에 추가된다.
+		
+		Map<String, Object> map = memberService.getPageMember(pageVO);
+		model.addAllAttributes(map);  // memberList, pages
+		
+		return "jsonView";
+	}
+	
+	@RequestMapping("/listAjaxHTML")
+	public String listAjaxHTML(PageVO pageVO, Model model) {
+		logger.debug("pageVO:{}",pageVO);  // 커맨드객체는 자동으로 model에 추가된다.
+		
+		Map<String, Object> map = memberService.getPageMember(pageVO);
+		model.addAllAttributes(map);  // memberList, pages
+		
+		//응답을 html -> jsp로 생성
+		return "member/listAjaxHTML";
+	}
+	
 	@RequestMapping("/view")
 	public String view(String userid, Model model) {
 		//userid 파라미터가 없을 때는 brown사용자를 보여준다.
 
 		MemberVO memberVo = memberService.getMember(userid);
 		model.addAttribute("memberVo", memberVo);
-		
 
 		return "tiles.member.memberContent";
+	}
+	
+	@RequestMapping("/memberAjaxPage")
+	public String memberAjaxPage() {
+		
+		return "tiles.member.memberAjaxPage";
+	}
+	
+	@RequestMapping("/memberAjax")
+	public String memberAjax(String userid, Model model) {
+		
+		MemberVO memberVO = memberService.getMember(userid);
+		model.addAttribute("memberVO", memberVO);
+		
+		return "jsonView";
 	}
 
 	@RequestMapping("/memberRegistView")
@@ -148,7 +189,24 @@ public class MemberController {
 			return "redirect:/member/view";
 		}
 
-		return "member/memberList";
+		return "tiles.member.memberListContent";
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
