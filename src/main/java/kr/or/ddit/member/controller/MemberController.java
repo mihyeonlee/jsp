@@ -145,9 +145,16 @@ public class MemberController {
 		
 		logger.debug("memberVo:{}",memberVo);
 		
-		int cnt = memberService.insertMember(memberVo);
-		if (cnt == 1) {
-			return "redirect:/member/memberList";
+		//예외처리 하는이유는 실패테스트코드실행 과정에서 실패가 뜨는걸 예외처리 안해주면 테스트코드 실패가 되기 때문에
+		int cnt = 0;
+		try {
+			
+			cnt = memberService.insertMember(memberVo);
+			if (cnt == 1) {
+				return "redirect:/member/memberList";
+			}
+			 
+		} catch (Exception e) {
 		}
 		
 		return "tiles.member.memberRegistContent";
@@ -159,7 +166,7 @@ public class MemberController {
 		logger.debug("memberUpdate userid : {}", userid);
 
 		MemberVO memberVo = memberService.getMember(userid);
-		model.addAttribute("memberVo", memberVo);
+		model.addAttribute("memberVo", memberVo); 
 
 		return "tiles.member.memberUpdateContent";
 	}

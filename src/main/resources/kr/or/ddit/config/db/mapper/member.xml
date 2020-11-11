@@ -40,10 +40,10 @@
 		#{zipcode},#{filename},#{realfilename})
 	</insert>
 	
-<!-- 	<delete id="deleteMember"> -->
-<!-- 		delete users -->
-<!-- 		where userid = #{userid} -->
-<!-- 	</delete> -->
+	<delete id="deleteMember">
+		delete users
+		where userid = #{userid}
+	</delete>
 	
 	<update id="updateMember" parameterType="MemberVO">
 		UPDATE users  

@@ -29,14 +29,7 @@ public class MemberService implements MemberServiceI {
 		//memberDao = new MemberDao(); 필드안에 객체를 생성하는 형식은 bean이 아니다 사용하면 안됨.
 	}
 	
-	public MemberDaoI getMemberDao() {
-		return memberDao;
-	}
-
-	public void setMemberDao(MemberDaoI memberDao) {
-		this.memberDao = memberDao;
-	}
-
+	
 	@Override
 	public MemberVO getMember(String userId) {
 		return memberDao.getMember(userId);
@@ -51,17 +44,14 @@ public class MemberService implements MemberServiceI {
 	@Override
 	public Map<String, Object> getPageMember(PageVO pageVO) {
 		
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
-		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberList",memberDao.getPageMember(sqlSession,pageVO));
+		map.put("memberList",memberDao.getPageMember(pageVO));
 		
 		//15건, 페이지 사이즈를 7로 가정했을때 3개의 페이지가 나와야한다.
-		double totalCnt = memberDao.getMemberTotalCnt(sqlSession);
+		double totalCnt = memberDao.getMemberTotalCnt();
 		int pages = (int)Math.ceil(totalCnt/7);
 		map.put("pages", pages);
 		
-		sqlSession.close();
 		return map;
 	}
 

@@ -13,9 +13,9 @@ public interface MemberDaoI {
 	
 	public List<MemberVO> selectAllMember();
 	
-	public List<MemberVO> getPageMember(SqlSession sqlSession ,PageVO pageVo);
+	public List<MemberVO> getPageMember(PageVO pageVo);
 	
-	public int getMemberTotalCnt(SqlSession sqlSession);
+	public int getMemberTotalCnt();
 	
 	public int insertMember(MemberVO memberVo);
 	

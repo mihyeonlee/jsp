@@ -23,7 +23,7 @@ public class MemberControllerTest extends WebTestConfig{
 	public void memberListTest() throws Exception {
 		mockMvc.perform(get("/member/memberList"))
 			.andExpect(status().isOk())  // 상태 :200
-			.andExpect(view().name("member/memberList")); // jsp
+			.andExpect(view().name("tiles.member.memberListContent")); // jsp
 	}
 	
 	@Test
@@ -31,7 +31,7 @@ public class MemberControllerTest extends WebTestConfig{
 		mockMvc.perform(get("/member/memberUpdateView")
 							.param("userid", "나는코니"))
 		.andExpect(status().isOk())  // 상태 :200
-		.andExpect(view().name("member/memberUpdate"))
+		.andExpect(view().name("tiles.member.memberUpdateContent"))
 		.andExpect(model().attributeExists("memberVo")); // jsp
 	}
 	
@@ -41,7 +41,7 @@ public class MemberControllerTest extends WebTestConfig{
 		mockMvc.perform(post("/member/view")
 							.param("userid", "나는코니"))
 				.andExpect(status().is(200))
-				.andExpect(view().name("member/member"))
+				.andExpect(view().name("tiles.member.memberContent"))
 				.andExpect(model().attributeExists("memberVo"));
 	}
 	
