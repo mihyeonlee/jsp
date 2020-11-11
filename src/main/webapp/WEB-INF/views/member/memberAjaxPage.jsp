@@ -13,11 +13,11 @@ $(document).ready(function(){
 	//memberAjax(brown); ==> 잘못된코드
 	
 	$('#modifyBtn').on("click",function(){
-		document.location="/member/update?userid=${memberVO.userid}"
+		document.location="/member/update?userid=${param.userid}"
 	})
 	
 	$('#profileDownBtn').on("click",function(){
-		document.location="/profileImgDownloadView?userid=${memberVO.userid}"
+		document.location="/profileImgDownloadView?userid=${param.userid}"
 	});
 
 });
@@ -27,14 +27,15 @@ function memberAjax(userid){
 		data : {userid : userid},
 		method : "get",
 		success : function(data){
-			$("#profile").attr("src", "${cp}/profileImg?userid=")
+			$("#profile").attr("src", "${cp}/profileImg?userid="+data.memberVO.userid)
 			$("#userid").html(data.memberVO.userid);
 			$("#usernm").html(data.memberVO.usernm);
 			$("#addr1").html(data.memberVO.addr1);
 			$("#addr2").html(data.memberVO.addr2);
 			$("#alias").html(data.memberVO.alias);
 			$("#zipcode").html(data.memberVO.zipcode);
-			$("#reg_dt").html(data.memberVO.reg_dt);
+			$("#reg_dt").html(data.memberVO.fmt_reg_dt);
+			$("#profileDownBtn").html(data.memberVO.realfilename);
 			
 		}
 });
@@ -50,8 +51,8 @@ title : memberAjaxPage
 						<div class="col-sm-10">
 							<%-- 							<img src="${cp }/profile/${memberVo.filename }"/> --%>
 							<!-- 사용자의 아이디보내서 확인  -->
-							<img src="${cp}/profileImgView?userid=${memberVO.userid }" /><br>
-							<button type="button" class="btn btn-default" id="profileDownBtn" >다운로드 : ${memberVO.realfilename }</button>
+							<img id="profile" /><br>
+							<button type="button" class="btn btn-default" id="profileDownBtn" >다운로드 : </button>
 							
 						</div>
 					</div>

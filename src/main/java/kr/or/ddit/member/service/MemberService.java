@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.common.model.PageVO;
@@ -18,6 +20,7 @@ import kr.or.ddit.member.model.MemberVO;
 
 @Service("memberService")
 public class MemberService implements MemberServiceI {
+	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 	
 	@Resource(name="memberDao") // 필드안에서도 주입받아 사용해야 빈임.
 	private MemberDaoI memberDao; 
@@ -64,6 +67,20 @@ public class MemberService implements MemberServiceI {
 
 	@Override
 	public int insertMember(MemberVO memberVo) {
+//		logger.debug("첫번째 insert 시작전");
+//		memberDao.insertMember(memberVo);
+//		logger.debug("첫번째 insert 시작후");
+//		
+		//첫 번째 쿼리는 정상적으로 실행되지만 
+		//두 번째 쿼리에서 동일한 데이터를 입력하여 PRIMARY KEY 제약조건에 의해 
+		//SQL 실행 실패
+		//첫 번째 쿼리는 성공했지만 트랜잭션 설정을 service 레벨에 설정하였기 때문에
+		//서비스 메소드에서 실행된 모든 쿼리를 rollback 처리한다.
+		
+//		logger.debug("두번째 insert 시작전");
+//		memberDao.insertMember(memberVo);
+//		logger.debug("두번째 insert 시작후");
+		
 		return memberDao.insertMember(memberVo);
 	}
 
