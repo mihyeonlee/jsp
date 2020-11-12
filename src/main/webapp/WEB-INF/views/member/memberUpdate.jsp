@@ -71,7 +71,7 @@ function initData(){
 					<div class="form-group">
 						<label for="realFilename" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-							<img src="${cp}/profileImg?userid=${memberVo.userid }"/>
+							<img src="${cp}/profileImgView?userid=${memberVo.userid }"/>
 							<input type="file" name="realFilename">
 						</div>
 					</div>
