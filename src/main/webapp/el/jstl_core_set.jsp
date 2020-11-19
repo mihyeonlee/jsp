@@ -22,11 +22,11 @@
 	<br>
 	객체의 필드 설정도 가능
 	<%
-		//memberVO가 서블릿을 통해 request객체에 설정되었다고 가정
-		//생성하고 나서 값을 설정하는 부분은 없음
-		MemberVO memberVO = new MemberVO();
-		request.setAttribute("memberVO", memberVO);
-	%>
+			//memberVO가 서블릿을 통해 request객체에 설정되었다고 가정
+				//생성하고 나서 값을 설정하는 부분은 없음
+				MemberVO memberVO = new MemberVO();
+				request.setAttribute("memberVO", memberVO);
+		%>
 	memberVO : ${memberVO }<br><br>
 	
 	set태그를 통해 scope객체에 저장된 vo 객체의 필드를 수정(setter)<br>

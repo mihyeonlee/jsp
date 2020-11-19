@@ -59,14 +59,15 @@ public class RequestCounterFilter implements Filter {
 
 		// 어떤 자료구조를 쓰면 좋을까??
 
+		
+		//전처리 : 요청이 서블릿으로 가기전에 실행되는 부분
+		logger.debug("RequestCounterFilter 전처리 부분-chain.doFilter 호출 전");
+		
 		// 등록된 다른 필터로 요청 위임
 		// 만약 더이상 등록된 필터가 없을 경우 요청을 처리할 서블릿 / jsp로 요청을 전달
+		chain.doFilter(request, response); // 이 다음 필터가 있으면 다음필터를 처리하고 없으면 servlet 처리
 		
-		logger.debug("RequestCounterFilter 전처리 부분-chain.doFilter 호출 전");
-		//전처리 : 요청이 서블릿으로 가기전에 실행되는 부분
-		chain.doFilter(request, response); //servlet 처리
-		
-		logger.debug("RequestCounterFilter 전처리 부분-chain.doFilter 호출 후");
+		logger.debug("RequestCounterFilter 후처리 부분-chain.doFilter 호출 후");
 		// 후처리 -> servlet에서 응답생성후 응답이 웹브라우저로 가는 단계에서 후속처리
 
 	}

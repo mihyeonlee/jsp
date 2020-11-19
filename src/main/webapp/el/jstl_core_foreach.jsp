@@ -42,7 +42,9 @@
 			<th>사용자 id</th>
 			<th>비밀번호</th>
 		</tr>
-		<% for(MemberVO member : memberList ){ %>
+		<%
+			for(MemberVO member : memberList ){
+		%>
 		<tr>
 			<td><%=member.getUserid() %></td>
 			<td><%=member.getPass() %></td>

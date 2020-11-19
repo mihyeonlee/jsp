@@ -54,7 +54,8 @@
 			<if test="realfilename != null">realfilename=#{realfilename},</if>
 			alias = #{alias},
 			addr1 = #{addr1},
-			addr2 = #{addr2}
+			addr2 = #{addr2},
+			zipcode = #{zipcode}
 		</set>
 		where userid=#{userid}
 	</update>
