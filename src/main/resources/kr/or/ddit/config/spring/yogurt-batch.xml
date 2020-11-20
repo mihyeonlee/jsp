@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- reader, processor, writer 등록해야하는데 제공받는것 사용 -->
+	<bean id="yogurtReader" class="org.mybatis.spring.batch.MyBatisCursorItemReader" 
+		>
+	
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="queryId" value="yogurt.selectCycle"/>
+	</bean>
+	
+	<context:annotation-config/>
+	
+	<!-- job파라미터를 받는애에게 scope="step"이 필요하다 -->
+	<bean id="yogurtProcessor" class="kr.or.ddit.batch.yogurt.YogurtProcessor" scope="step"/>
+	
+	<bean id="yogurtWriter" class="kr.or.ddit.batch.yogurt.CustomMyBatisBatchItemWriter" >
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="statementId" value="yogurt.insertDaily"/>
+	</bean>
+	
+	<batch:job-repository id="jobRepository"
+						  data-source="dataSource"
+						  transaction-manager="transactionManager"/>
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository"/>
+	</bean>
+	
+	<batch:job id="yogurtJob" restartable="true">
+		<batch:step id="yogurtStep" allow-start-if-complete="true">
+			<batch:tasklet>
+				<batch:chunk reader="yogurtReader" 
+							 processor="yogurtProcessor"
+							 writer="yogurtWriter"
+							 commit-interval="2"/>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+</beans>

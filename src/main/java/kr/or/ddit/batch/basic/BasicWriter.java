@@ -1,0 +1,23 @@
+package kr.or.ddit.batch.basic;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.batch.item.ItemWriter;
+
+public class BasicWriter implements ItemWriter<String> {
+	private static final Logger logger = LoggerFactory.getLogger(BasicWriter.class);
+	
+	//한번에 처리할 청크에 따라서 list사이즈가 달라진다.
+	@Override
+	public void write(List<? extends String> items) throws Exception {
+		logger.debug("==============writer==============");
+		logger.debug("items : {}",items);
+		logger.debug("==============writer==============");
+	}
+
+	
+
+}
+

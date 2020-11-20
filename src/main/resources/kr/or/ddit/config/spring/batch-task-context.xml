@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- job Repository : db를 사용하지 않는 형식상의 jobRepository- MapJobRepositoryFactoryBean(클래스명) -->
+	<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean"/>
+	
+	<!-- job launcher : SimpleJobLauncher -->
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<!-- 참조하는걸 알려준다. 잡레파지토리는 잡레파지토리를 참조 -->
+		<property name="jobRepository" ref="jobRepository"/>
+	</bean>
+	
+	<bean id="basicReader" class="kr.or.ddit.batch.basic.BasicReader"/>
+	<bean id ="basicProcessor" class="kr.or.ddit.batch.basic.BasicProcessor"/>
+	<bean id="basicWriter" class="kr.or.ddit.batch.basic.BasicWriter"/>
+	
+	<!-- step에서 기본적으로 사용하는 트랜잭션 매니저, 이름이 정해짐  transactionManager-->
+	<bean id="resourcelessTX" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+	
+	<!-- restartable="true"는 반복실행 -->
+	<batch:job id="basicJob" restartable="true">
+		<batch:step id="basicStep" allow-start-if-complete="true">
+			<batch:tasklet transaction-manager="resourcelessTX">
+				<batch:chunk reader="basicReader"
+							 processor="basicProcessor" 
+							 writer="basicWriter"
+							 commit-interval="2"/>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+	
+	<bean id="basicTask" class="kr.or.ddit.batch.basic.BasicBatchTask">
+		<!-- setter주입 -->
+<!-- 		<property name="jobLauncher" ref="jobLauncher"/> -->
+<!-- 		<property name="basicJob" ref="basicJob"/> -->
+	</bean>
+	
+	<task:scheduler id="scheduler"/>
+	<task:scheduled-tasks scheduler="scheduler">
+		<task:scheduled ref="basicTask" method="task" cron="*/3 * * * * *"/>
+	</task:scheduled-tasks>
+	
+	<!-- resource어노테이션처리 컨포넌트어노테이션 처리하는 부분이 잇다면 필요없다. 컨포넌트에서 리소스도 처리해주기때문에-->
+	<context:annotation-config/>
+</beans>
